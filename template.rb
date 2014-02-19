@@ -6,6 +6,10 @@ use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
 # ========================================
+append_to_file 'Gemfile' do
+  "ruby '#{RUBY_VERSION}'\n"
+end
+
 gem 'slim-rails'
 gem 'figaro' if use_figaro
 
