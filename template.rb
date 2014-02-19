@@ -18,6 +18,7 @@ gem 'slim-rails'
 gem 'figaro' if use_figaro
 
 gem_group :production do
+  gem 'pg' if use_heroku
   gem 'rails_12factor' if use_heroku
 end
 
@@ -36,6 +37,10 @@ gem_group :development do
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
+end
+
+if use_heroku
+  gsub_file 'Gemfile', "gem 'sqlite3'", "gem 'sqlite3', group: [:development, :test]"
 end
 
 # Run bundle
