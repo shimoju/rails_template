@@ -13,6 +13,9 @@ run 'bundle install --without production'
 # RSpec
 generate 'rspec:install'
 remove_dir 'test'
+append_to_file '.rspec' do
+  "--format documentation\n"
+end
 
 # Figaro
 generate 'figaro:install'
