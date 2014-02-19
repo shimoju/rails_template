@@ -1,4 +1,5 @@
 # Questions
+use_heroku = yes?('Use Heroku?')
 use_ssl = yes?('Use SSL in production?')
 
 # Gems
@@ -17,6 +18,13 @@ gem_group :development do
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
+end
+
+# Heroku
+if use_heroku
+  gem_group :production do
+    gem 'rails_12factor'
+  end
 end
 
 # Run bundle
