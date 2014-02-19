@@ -1,10 +1,11 @@
 # Questions
 use_heroku = yes?('Use Heroku?')
 use_ssl = yes?('Use SSL in production?')
+use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
 gem 'slim-rails'
-gem 'figaro'
+gem 'figaro' if use_figaro
 
 gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
@@ -51,9 +52,11 @@ append_to_file '.rspec' do
 end
 
 # Figaro
-generate 'figaro:install'
-## Copy sample file
-run 'cp config/application.yml config/application.sample.yml'
+if use_figaro
+  generate 'figaro:install'
+  ## Copy sample file
+  run 'cp config/application.yml config/application.sample.yml'
+end
 
 # Guard
 run 'bundle exec guard init'
