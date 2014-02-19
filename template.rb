@@ -65,8 +65,7 @@ end
 # Server
 # ========================================
 # Foreman
-create_file 'Procfile'
-append_to_file 'Procfile' do
+create_file 'Procfile' do
   if use_puma
     "web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}\n"
   else
