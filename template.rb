@@ -11,6 +11,9 @@ gem_group :production do
   gem 'rails_12factor' if use_heroku
 end
 
+gem_group :test do
+end
+
 gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
