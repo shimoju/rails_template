@@ -132,6 +132,7 @@ end
 # ========================================
 generate 'controller', 'welcome index'
 uncomment_lines 'config/routes.rb', "root 'welcome#index'"
+comment_lines 'config/routes.rb', "get 'welcome/index'"
 
 # Database
 # ========================================
