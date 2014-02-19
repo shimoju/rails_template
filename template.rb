@@ -1,5 +1,6 @@
 # Gems
 gem 'slim-rails'
+gem 'figaro'
 
 gem_group :development, :test do
   gem 'rspec-rails'
@@ -12,6 +13,9 @@ run 'bundle install --without production'
 # RSpec
 generate 'rspec:install'
 remove_dir 'test'
+
+# Figaro
+generate 'figaro:install'
 
 # Slim
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
