@@ -6,7 +6,7 @@ use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
 # ========================================
-append_to_file 'Gemfile' do
+prepend_to_file 'Gemfile' do
   "ruby '#{RUBY_VERSION}'\n"
 end
 
