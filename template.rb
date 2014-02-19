@@ -10,6 +10,7 @@ append_to_file 'Gemfile' do
   "ruby '#{RUBY_VERSION}'\n"
 end
 
+gem 'foreman'
 gem 'slim-rails'
 gem 'figaro' if use_figaro
 
@@ -56,6 +57,14 @@ end
 # SSL
 if use_ssl
   uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
+end
+
+# Server
+# ========================================
+# Foreman
+create_file 'Procfile'
+append_to_file 'Procfile' do
+  "web: bundle exec rails server -p $PORT\n"
 end
 
 # Config Gems
