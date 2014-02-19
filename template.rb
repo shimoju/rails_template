@@ -2,6 +2,7 @@
 # ========================================
 use_heroku = yes?('Use Heroku?')
 use_ssl = yes?('Use SSL in production?')
+use_puma = yes?('Use Puma as the app server?')
 use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
@@ -11,6 +12,8 @@ prepend_to_file 'Gemfile' do
 end
 
 gem 'foreman'
+gem 'puma' if use_puma
+
 gem 'slim-rails'
 gem 'figaro' if use_figaro
 
@@ -64,7 +67,11 @@ end
 # Foreman
 create_file 'Procfile'
 append_to_file 'Procfile' do
-  "web: bundle exec rails server -p $PORT\n"
+  if use_puma
+    "web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}\n"
+  else
+    "web: bundle exec rails server -p $PORT\n"
+  end
 end
 
 # Config Gems
