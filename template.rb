@@ -1,9 +1,11 @@
 # Questions
+# ========================================
 use_heroku = yes?('Use Heroku?')
 use_ssl = yes?('Use SSL in production?')
 use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
+# ========================================
 gem 'slim-rails'
 gem 'figaro' if use_figaro
 
@@ -29,9 +31,11 @@ gem_group :development do
 end
 
 # Run bundle
+# ========================================
 run 'bundle install --without production'
 
 # Config Application
+# ========================================
 application do
  %q{# Config Generators
     config.generators do |g|
@@ -45,6 +49,7 @@ application do
 end
 
 # RSpec
+# ========================================
 generate 'rspec:install'
 remove_dir 'test'
 append_to_file '.rspec' do
@@ -52,6 +57,7 @@ append_to_file '.rspec' do
 end
 
 # Figaro
+# ========================================
 if use_figaro
   generate 'figaro:install'
   ## Copy sample file
@@ -59,22 +65,27 @@ if use_figaro
 end
 
 # Guard
+# ========================================
 run 'bundle exec guard init'
 
 # Slim
+# ========================================
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 environment "# Configure Slim", env: 'development'
 
 # SSL
+# ========================================
 if use_ssl
   uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 end
 
 # README
+# ========================================
 remove_file 'README.rdoc'
 create_file 'README.md'
 
 # Git
+# ========================================
 git :init
 git add: '.'
 git commit: %Q{ -m 'Initial commit' }
