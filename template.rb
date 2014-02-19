@@ -10,6 +10,10 @@ gem_group :development, :test do
   gem 'factory_girl_rails'
 end
 
+gem_group :development do
+  gem 'pry-rails'
+end
+
 # Run bundle
 run 'bundle install --without production'
 
