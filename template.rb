@@ -1,7 +1,6 @@
 # Questions
 # ========================================
 use_heroku = yes?('Use Heroku?')
-use_ssl = yes?('Use SSL in production?')
 use_puma = yes?('Use Puma as the app server?')
 use_figaro = yes?('Use Figaro config manager?')
 
@@ -63,9 +62,7 @@ application do
 end
 
 # SSL
-if use_ssl
-  uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
-end
+uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 
 # Server
 # ========================================
