@@ -1,4 +1,6 @@
 # Gems
+gem 'slim-rails'
+
 gem_group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -10,6 +12,10 @@ run 'bundle install --without production'
 # RSpec
 generate 'rspec:install'
 remove_dir 'test'
+
+# Slim
+environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
+environment "# Configure Slim", env: 'development'
 
 # README
 remove_file 'README.rdoc'
