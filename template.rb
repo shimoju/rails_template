@@ -133,6 +133,11 @@ end
 generate 'controller', 'welcome index'
 uncomment_lines 'config/routes.rb', "root 'welcome#index'"
 
+# Database
+# ========================================
+rake 'db:create'
+rake 'db:migrate'
+
 # Git
 # ========================================
 git :init
