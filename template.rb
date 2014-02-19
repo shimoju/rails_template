@@ -1,3 +1,6 @@
+# Questions
+use_ssl = yes?('Use SSL in production?')
+
 # Gems
 gem 'slim-rails'
 gem 'figaro'
@@ -25,6 +28,11 @@ run 'cp config/application.yml config/application.sample.yml'
 # Slim
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 environment "# Configure Slim", env: 'development'
+
+# SSL
+if use_ssl
+  uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
+end
 
 # README
 remove_file 'README.rdoc'
