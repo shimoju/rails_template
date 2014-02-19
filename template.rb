@@ -22,6 +22,7 @@ gem_group :production do
 end
 
 gem_group :test do
+  gem 'capybara'
 end
 
 gem_group :development, :test do
