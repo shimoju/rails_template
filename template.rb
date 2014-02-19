@@ -14,6 +14,9 @@ gem_group :development do
   gem 'pry-rails'
   gem 'guard'
   gem 'terminal-notifier-guard'
+  gem 'guard-livereload', require: false
+  gem 'guard-pow', require: false
+  gem 'guard-rspec', require: false
 end
 
 # Run bundle
