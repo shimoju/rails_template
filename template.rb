@@ -16,6 +16,8 @@ remove_dir 'test'
 
 # Figaro
 generate 'figaro:install'
+## Copy sample file
+run 'cp config/application.yml config/application.sample.yml'
 
 # Slim
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
