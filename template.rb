@@ -76,6 +76,11 @@ append_to_file '.rspec' do
   "--format documentation\n"
 end
 
+# factory_girl
+insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+  "  config.include FactoryGirl::Syntax::Methods\n\n"
+end
+
 # Guard
 run 'bundle exec guard init'
 
