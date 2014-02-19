@@ -131,6 +131,11 @@ create_file 'README.md' do
   "# #{app_name.classify}\n"
 end
 
+# Root path
+# ========================================
+generate 'controller', 'welcome index'
+uncomment_lines 'config/routes.rb', "root 'welcome#index'"
+
 # Git
 # ========================================
 git :init
