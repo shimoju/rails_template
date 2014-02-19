@@ -1,5 +1,6 @@
 gem_group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 run 'bundle install --without production'
