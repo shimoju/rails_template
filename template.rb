@@ -82,7 +82,9 @@ end
 # README
 # ========================================
 remove_file 'README.rdoc'
-create_file 'README.md'
+create_file 'README.md' do
+  "# #{app_name.classify}\n"
+end
 
 # Git
 # ========================================
