@@ -40,6 +40,7 @@ run 'bundle install --without production'
 
 # Config Application
 # ========================================
+# application.rb
 application do
  %q{# Config Generators
     config.generators do |g|
@@ -52,35 +53,32 @@ application do
 }
 end
 
-# RSpec
+# SSL
+if use_ssl
+  uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
+end
+
+# Config Gems
 # ========================================
+# RSpec
 generate 'rspec:install'
 remove_dir 'test'
 append_to_file '.rspec' do
   "--format documentation\n"
 end
 
-# Figaro
-# ========================================
-if use_figaro
-  generate 'figaro:install'
-  ## Copy sample file
-  run 'cp config/application.yml config/application.sample.yml'
-end
-
 # Guard
-# ========================================
 run 'bundle exec guard init'
 
 # Slim
-# ========================================
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 environment "# Configure Slim", env: 'development'
 
-# SSL
-# ========================================
-if use_ssl
-  uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
+# Figaro
+if use_figaro
+  generate 'figaro:install'
+  # Copy sample file
+  run 'cp config/application.yml config/application.sample.yml'
 end
 
 # README
