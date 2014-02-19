@@ -74,4 +74,4 @@ create_file 'README.md'
 # Git
 git :init
 git add: '.'
-git commit: %Q{ -m 'First Commit' }
+git commit: %Q{ -m 'Initial commit' }
