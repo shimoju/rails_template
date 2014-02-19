@@ -7,6 +7,10 @@ use_figaro = yes?('Use Figaro config manager?')
 gem 'slim-rails'
 gem 'figaro' if use_figaro
 
+gem_group :production do
+  gem 'rails_12factor' if use_heroku
+end
+
 gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
@@ -19,13 +23,6 @@ gem_group :development do
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
-end
-
-# Heroku
-if use_heroku
-  gem_group :production do
-    gem 'rails_12factor'
-  end
 end
 
 # Run bundle
