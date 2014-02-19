@@ -36,6 +36,7 @@ gem_group :development do
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
+  gem 'html2slim', require: false
 end
 
 if use_heroku
@@ -113,6 +114,10 @@ run 'bundle exec guard init'
 # Slim
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 environment "# Configure Slim", env: 'development'
+# Convert application.html.erb to Slim
+run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
+# Fix doctype
+gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
 
 # Figaro
 if use_figaro
