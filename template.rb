@@ -6,7 +6,7 @@ gem 'slim-rails'
 gem 'figaro'
 
 gem_group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
 end
 
