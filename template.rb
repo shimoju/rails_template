@@ -12,6 +12,8 @@ end
 
 gem_group :development do
   gem 'pry-rails'
+  gem 'guard'
+  gem 'terminal-notifier-guard'
 end
 
 # Run bundle
@@ -28,6 +30,9 @@ end
 generate 'figaro:install'
 ## Copy sample file
 run 'cp config/application.yml config/application.sample.yml'
+
+# Guard
+run 'bundle exec guard init'
 
 # Slim
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
