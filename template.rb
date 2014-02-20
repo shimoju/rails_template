@@ -6,6 +6,9 @@ use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
 # ==============================================================================
+# Use Rails Assets
+prepend_to_file 'Gemfile', "source 'https://rails-assets.org'\n"
+
 # Specify Ruby version
 prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 
