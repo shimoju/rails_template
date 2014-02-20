@@ -42,6 +42,10 @@ end
 gem_group :development do
   # irb alternative
   gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-coolline'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
   # Format query log
   gem 'hirb-unicode'
   # Handle events on file system modifications
