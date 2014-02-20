@@ -37,9 +37,7 @@ gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   # Fixtures replacement
   gem 'factory_girl_rails'
-end
 
-gem_group :development do
   # irb alternative
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -50,6 +48,9 @@ gem_group :development do
   gem 'hirb-unicode'
   # Pretty prints
   gem 'awesome_print'
+end
+
+gem_group :development do
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
