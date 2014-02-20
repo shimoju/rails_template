@@ -4,6 +4,12 @@ use_heroku = yes?('Use Heroku?')
 use_puma = yes?('Use Puma as the app server?')
 use_figaro = yes?('Use Figaro config manager?')
 
+# Git init
+# ==============================================================================
+git :init
+git add: '.'
+git commit: %Q{ -m 'Initial commit' }
+
 # Gems
 # ==============================================================================
 # Use Rails Assets
@@ -171,8 +177,7 @@ comment_lines 'config/routes.rb', "get 'welcome/index'"
 rake 'db:create'
 rake 'db:migrate'
 
-# Git
+# Git commit
 # ==============================================================================
-git :init
-git add: '.'
-git commit: %Q{ -m 'Initial commit' }
+git add: '--all'
+git commit: %Q{ -m 'Apply template' }
