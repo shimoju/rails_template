@@ -48,6 +48,8 @@ gem_group :development do
   gem 'pry-stack_explorer'
   # Format query log
   gem 'hirb-unicode'
+  # Pretty prints
+  gem 'awesome_print'
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
