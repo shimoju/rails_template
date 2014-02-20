@@ -63,6 +63,9 @@ gem_group :development do
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
+  # Better error page
+  gem 'better_errors'
+  gem 'binding_of_caller'
   # Convert ERB to Slim
   gem 'html2slim', require: false
 end
