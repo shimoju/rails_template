@@ -42,6 +42,8 @@ end
 gem_group :development do
   # irb alternative
   gem 'pry-rails'
+  # Format query log
+  gem 'hirb-unicode'
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
