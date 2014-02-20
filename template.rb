@@ -1,8 +1,9 @@
-# Questions
+# Ask
 # ==============================================================================
-use_heroku = yes?('Use Heroku?')
-use_puma = yes?('Use Puma as the app server?')
-use_figaro = yes?('Use Figaro config manager?')
+use = {}
+use[:heroku] = yes?('Use Heroku?')
+use[:puma] = yes?('Use Puma as the app server?')
+use[:figaro] = yes?('Use Figaro config manager?')
 
 # Git init
 # ==============================================================================
@@ -21,16 +22,16 @@ prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 # Process manager
 gem 'foreman'
 # App server
-gem 'puma' if use_puma
+gem 'puma' if use[:puma]
 
 # Template engine
 gem 'slim-rails'
 # Config manager
-gem 'figaro' if use_figaro
+gem 'figaro' if use[:figaro]
 
 gem_group :production do
-  gem 'pg' if use_heroku
-  gem 'rails_12factor' if use_heroku
+  gem 'pg' if use[:heroku]
+  gem 'rails_12factor' if use[:heroku]
 end
 
 gem_group :test do
@@ -70,7 +71,7 @@ gem_group :development do
   gem 'html2slim', require: false
 end
 
-if use_heroku
+if use[:heroku]
   gsub_file 'Gemfile', "gem 'sqlite3'", "gem 'sqlite3', group: [:development, :test]"
 end
 
@@ -103,7 +104,7 @@ uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 # Foreman
 # ------------------------------------------------------------------------------
 create_file 'Procfile' do
-  if use_puma
+  if use[:puma]
     "web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}\n"
   else
     "web: bundle exec rails server -p $PORT\n"
@@ -112,7 +113,7 @@ end
 
 # Puma
 # ------------------------------------------------------------------------------
-if use_puma
+if use[:puma]
   create_file 'config/initializers/database_connection.rb' do
 %q{# https://devcenter.heroku.com/articles/concurrency-and-database-connections
 Rails.application.config.after_initialize do
@@ -158,7 +159,7 @@ gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
 
 # Figaro
 # ------------------------------------------------------------------------------
-if use_figaro
+if use[:figaro]
   generate 'figaro:install'
   # Copy sample file
   run 'cp config/application.yml config/application.sample.yml'
