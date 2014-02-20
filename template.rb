@@ -1,11 +1,11 @@
 # Questions
-# ========================================
+# ==============================================================================
 use_heroku = yes?('Use Heroku?')
 use_puma = yes?('Use Puma as the app server?')
 use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
-# ========================================
+# ==============================================================================
 prepend_to_file 'Gemfile' do
   "ruby '#{RUBY_VERSION}'\n"
 end
@@ -45,11 +45,11 @@ if use_heroku
 end
 
 # Run bundle
-# ========================================
+# ==============================================================================
 run 'bundle install --without production'
 
 # Config Application
-# ========================================
+# ==============================================================================
 # application.rb
 application do
  %q{# Config Generators
@@ -67,7 +67,7 @@ end
 uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 
 # Server
-# ========================================
+# ==============================================================================
 # Foreman
 create_file 'Procfile' do
   if use_puma
@@ -96,7 +96,7 @@ end
 end
 
 # Config Gems
-# ========================================
+# ==============================================================================
 # RSpec
 generate 'rspec:install'
 remove_dir 'test'
@@ -128,25 +128,25 @@ if use_figaro
 end
 
 # README
-# ========================================
+# ==============================================================================
 remove_file 'README.rdoc'
 create_file 'README.md' do
   "# #{app_name.classify}\n"
 end
 
 # Root path
-# ========================================
+# ==============================================================================
 generate 'controller', 'welcome index'
 uncomment_lines 'config/routes.rb', "root 'welcome#index'"
 comment_lines 'config/routes.rb', "get 'welcome/index'"
 
 # Database
-# ========================================
+# ==============================================================================
 rake 'db:create'
 rake 'db:migrate'
 
 # Git
-# ========================================
+# ==============================================================================
 git :init
 git add: '.'
 git commit: %Q{ -m 'Initial commit' }
