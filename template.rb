@@ -53,6 +53,7 @@ run 'bundle install --without production'
 # Config Application
 # ==============================================================================
 # application.rb
+# ------------------------------------------------------------------------------
 application do
  %q{# Config Generators
     config.generators do |g|
@@ -66,11 +67,13 @@ application do
 end
 
 # SSL
+# ------------------------------------------------------------------------------
 uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 
 # Server
 # ==============================================================================
 # Foreman
+# ------------------------------------------------------------------------------
 create_file 'Procfile' do
   if use_puma
     "web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}\n"
@@ -80,6 +83,7 @@ create_file 'Procfile' do
 end
 
 # Puma
+# ------------------------------------------------------------------------------
 if use_puma
   create_file 'config/initializers/database_connection.rb' do
 %q{# https://devcenter.heroku.com/articles/concurrency-and-database-connections
@@ -100,19 +104,23 @@ end
 # Config Gems
 # ==============================================================================
 # RSpec
+# ------------------------------------------------------------------------------
 generate 'rspec:install'
 remove_dir 'test'
 append_to_file '.rspec', "--format documentation\n"
 
 # factory_girl
+# ------------------------------------------------------------------------------
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
   "  config.include FactoryGirl::Syntax::Methods\n\n"
 end
 
 # Guard
+# ------------------------------------------------------------------------------
 run 'bundle exec guard init'
 
 # Slim
+# ------------------------------------------------------------------------------
 environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 environment "# Configure Slim", env: 'development'
 # Convert application.html.erb to Slim
@@ -121,6 +129,7 @@ run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/vi
 gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
 
 # Figaro
+# ------------------------------------------------------------------------------
 if use_figaro
   generate 'figaro:install'
   # Copy sample file
