@@ -12,10 +12,14 @@ prepend_to_file 'Gemfile', "source 'https://rails-assets.org'\n"
 # Specify Ruby version
 prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 
+# Process manager
 gem 'foreman'
+# App server
 gem 'puma' if use_puma
 
+# Template engine
 gem 'slim-rails'
+# Config manager
 gem 'figaro' if use_figaro
 
 gem_group :production do
@@ -24,21 +28,27 @@ gem_group :production do
 end
 
 gem_group :test do
+  # Acceptance test framework
   gem 'capybara'
 end
 
 gem_group :development, :test do
+  # Testing framework
   gem 'rspec-rails', '~> 3.0.0.beta'
+  # Fixtures replacement
   gem 'factory_girl_rails'
 end
 
 gem_group :development do
+  # irb alternative
   gem 'pry-rails'
+  # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
+  # Convert ERB to Slim
   gem 'html2slim', require: false
 end
 
