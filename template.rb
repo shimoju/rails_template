@@ -6,9 +6,8 @@ use_figaro = yes?('Use Figaro config manager?')
 
 # Gems
 # ==============================================================================
-prepend_to_file 'Gemfile' do
-  "ruby '#{RUBY_VERSION}'\n"
-end
+# Specify Ruby version
+prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 
 gem 'foreman'
 gem 'puma' if use_puma
@@ -100,9 +99,7 @@ end
 # RSpec
 generate 'rspec:install'
 remove_dir 'test'
-append_to_file '.rspec' do
-  "--format documentation\n"
-end
+append_to_file '.rspec', "--format documentation\n"
 
 # factory_girl
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
@@ -130,9 +127,7 @@ end
 # README
 # ==============================================================================
 remove_file 'README.rdoc'
-create_file 'README.md' do
-  "# #{app_name.classify}\n"
-end
+create_file 'README.md', "# #{app_name.classify}\n"
 
 # Root path
 # ==============================================================================
