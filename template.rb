@@ -60,7 +60,8 @@ gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   # Fixtures replacement
   gem 'factory_girl_rails'
-
+  # Autoload .env
+  gem 'dotenv-rails'
   # irb alternative
   gem 'pry-rails'
   gem 'pry-byebug'
