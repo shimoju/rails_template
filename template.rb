@@ -53,6 +53,7 @@ end
 gem_group :test do
   # Acceptance test framework
   gem 'capybara'
+  gem 'simplecov', '~> 0.7.1', require: false
 end
 
 gem_group :development, :test do
@@ -160,6 +161,10 @@ append_to_file '.rspec', "--format documentation\n"
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
   "  config.include FactoryGirl::Syntax::Methods\n\n"
 end
+
+# SimpleCov
+# ------------------------------------------------------------------------------
+prepend_to_file 'spec/spec_helper.rb', "require 'simplecov'\nSimpleCov.start 'rails'\n\n"
 
 # Guard
 # ------------------------------------------------------------------------------
