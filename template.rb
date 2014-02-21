@@ -5,8 +5,24 @@ use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
 use[:figaro] = yes?('Use Figaro config manager?')
 
-# Git init
+# Git
 # ==============================================================================
+# .gitignore
+append_to_file '.gitignore' do
+%q{
+.DS_Store
+**.orig
+/vendor/bundle
+/spec/tmp
+/coverage/
+*.sassc
+.sass-cache
+.env
+.env.*
+}
+end
+
+# Initial commit
 git :init
 git add: '.'
 git commit: %Q{ -m 'Initial commit' }
