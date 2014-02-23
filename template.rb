@@ -53,6 +53,7 @@ end
 gem_group :test do
   # Acceptance test framework
   gem 'capybara'
+  # Code coverage analysis tool
   gem 'simplecov', '~> 0.7.1', require: false
 end
 
