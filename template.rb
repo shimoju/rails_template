@@ -74,15 +74,15 @@ gem_group :development, :test do
 end
 
 gem_group :development do
+  # Better error page
+  gem 'better_errors'
+  gem 'binding_of_caller'
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
-  # Better error page
-  gem 'better_errors'
-  gem 'binding_of_caller'
   # Convert ERB to Slim
   gem 'html2slim', require: false
 end
