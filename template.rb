@@ -97,6 +97,12 @@ run 'bundle install --without production'
 
 # Config Application
 # ==============================================================================
+# Create files
+# ------------------------------------------------------------------------------
+# README
+remove_file 'README.rdoc'
+create_file 'README.md', "# #{app_name.classify}\n"
+
 # application.rb
 # ------------------------------------------------------------------------------
 application do
@@ -183,11 +189,6 @@ environment "# Configure Slim", env: 'development'
 run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
 # Fix doctype
 gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
-
-# README
-# ==============================================================================
-remove_file 'README.rdoc'
-create_file 'README.md', "# #{app_name.classify}\n"
 
 # Root path
 # ==============================================================================
