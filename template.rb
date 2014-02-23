@@ -3,7 +3,6 @@
 use = {}
 use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
-use[:figaro] = yes?('Use Figaro config manager?')
 
 # Git
 # ==============================================================================
@@ -42,8 +41,6 @@ gem 'puma' if use[:puma]
 
 # Template engine
 gem 'slim-rails'
-# Config manager
-gem 'figaro' if use[:figaro]
 
 gem_group :production do
   gem 'pg' if use[:heroku]
@@ -186,14 +183,6 @@ environment "# Configure Slim", env: 'development'
 run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
 # Fix doctype
 gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
-
-# Figaro
-# ------------------------------------------------------------------------------
-if use[:figaro]
-  generate 'figaro:install'
-  # Copy sample file
-  run 'cp config/application.yml config/application.sample.yml'
-end
 
 # README
 # ==============================================================================
