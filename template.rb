@@ -77,6 +77,8 @@ gem_group :development do
   # Better error page
   gem 'better_errors'
   gem 'binding_of_caller'
+  # Turns off the asset pipeline log
+  gem 'quiet_assets'
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
