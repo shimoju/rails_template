@@ -148,6 +148,18 @@ Rails.application.config.after_initialize do
 end
 }
   end
+  append_to_file '.env' do
+%q{
+# config/initializers/database_connection.rb
+DB_POOL=5
+DB_REAP_FREQ=10
+
+# Procfile
+PUMA_MAX_THREADS=12
+PUMA_MIN_THREADS=8
+PUMA_WORKERS=2
+}
+  end
 end
 
 # Config Gems
