@@ -3,6 +3,7 @@
 use = {}
 use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
+use[:devise] = yes?('Use devise?')
 
 # Git
 # ==============================================================================
@@ -41,6 +42,8 @@ gem 'puma' if use[:puma]
 
 # Template engine
 gem 'slim-rails'
+# Authentication solution
+gem 'devise' if use[:devise]
 
 gem_group :production do
   gem 'pg' if use[:heroku]
@@ -214,6 +217,12 @@ environment "# Configure Slim", env: 'development'
 run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
 # Fix doctype
 gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
+
+# devise
+# ------------------------------------------------------------------------------
+if use[:devise]
+  generate 'devise:install'
+end
 
 # Root path
 # ==============================================================================
