@@ -174,10 +174,25 @@ generate 'rspec:install'
 remove_dir 'test'
 append_to_file '.rspec', "--format documentation\n"
 
+# DatabaseRewinder
+# ------------------------------------------------------------------------------
+insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+%q{
+  config.before :suite do
+    DatabaseRewinder.clean_all
+  end
+
+  config.after :each do
+    DatabaseRewinder.clean
+  end
+
+}
+end
+
 # factory_girl
 # ------------------------------------------------------------------------------
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
-  "  config.include FactoryGirl::Syntax::Methods\n\n"
+  "  config.include FactoryGirl::Syntax::Methods\n"
 end
 
 # SimpleCov
