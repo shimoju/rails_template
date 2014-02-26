@@ -194,6 +194,9 @@ end
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
   "  config.include FactoryGirl::Syntax::Methods\n"
 end
+insert_into_file 'spec/spec_helper.rb', after: "config.before :suite do\n" do
+  "    FactoryGirl.reload\n"
+end
 
 # SimpleCov
 # ------------------------------------------------------------------------------
