@@ -136,6 +136,10 @@ end
 # ------------------------------------------------------------------------------
 uncomment_lines 'config/environments/production.rb', 'config.force_ssl = true'
 
+# Mailer
+# ------------------------------------------------------------------------------
+environment "config.action_mailer.default_url_options = { host: 'localhost:3000' }\n", env: 'development'
+
 # Server
 # ------------------------------------------------------------------------------
 if use[:puma]
