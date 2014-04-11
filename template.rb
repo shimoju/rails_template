@@ -15,8 +15,6 @@ append_to_file '.gitignore' do
 /vendor/bundle
 /spec/tmp
 /coverage/
-*.sassc
-.sass-cache
 .env
 .env.*
 }
