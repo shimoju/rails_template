@@ -143,7 +143,26 @@ environment "config.action_mailer.default_url_options = { host: 'localhost:3000'
 # ------------------------------------------------------------------------------
 if use[:puma]
   remove_file 'Procfile'
-  create_file 'Procfile', "web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}\n"
+  create_file 'Procfile', "web: bundle exec puma -C config/puma.rb\n"
+  create_file 'config/puma.rb' do
+%q{# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
+workers Integer(ENV['PUMA_WORKERS'] || 3)
+threads Integer(ENV['MIN_THREADS']  || 1), Integer(ENV['MAX_THREADS'] || 16)
+
+preload_app!
+
+rackup      DefaultRackup
+port        ENV['PORT']     || 3000
+environment ENV['RACK_ENV'] || 'development'
+
+on_worker_boot do
+  # worker specific setup
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
+  end
+end
+}
+  end
   create_file 'config/initializers/database_connection.rb' do
 %q{# https://devcenter.heroku.com/articles/concurrency-and-database-connections
 Rails.application.config.after_initialize do
