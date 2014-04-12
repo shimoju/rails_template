@@ -122,7 +122,8 @@ application do
  %q{# Config Generators
     config.generators do |g|
       g.test_framework :rspec,
-        helper_specs: false,
+        # controller_specs: false,
+        # helper_specs: false,
         request_specs: false,
         routing_specs: false,
         view_specs: false
