@@ -234,8 +234,7 @@ run 'bundle exec guard init'
 
 # Slim
 # ------------------------------------------------------------------------------
-environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
-environment "# Configure Slim", env: 'development'
+environment "# Configure Slim\n  Slim::Engine.set_default_options pretty: true, sort_attrs: false\n", env: 'development'
 # Convert application.html.erb to Slim
 run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
 
