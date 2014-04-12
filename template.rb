@@ -218,8 +218,6 @@ environment "Slim::Engine.set_default_options pretty: true, sort_attrs: false\n"
 environment "# Configure Slim", env: 'development'
 # Convert application.html.erb to Slim
 run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/views/layouts/application.html.slim'
-# Fix doctype
-gsub_file 'app/views/layouts/application.html.slim', /^doctype$/, 'doctype html'
 
 # devise
 # ------------------------------------------------------------------------------
