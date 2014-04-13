@@ -4,6 +4,7 @@ use = {}
 use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
 use[:devise] = yes?('Use devise?')
+use[:spring] = yes?('Use Spring preloader?')
 
 # Git
 # ==============================================================================
@@ -261,6 +262,10 @@ gsub_file '.env', "your_secret_key\n", `bundle exec rake secret`
 # ==============================================================================
 rake 'db:create'
 rake 'db:migrate'
+
+# Spring
+# ==============================================================================
+run 'bundle exec spring binstub --all' if use[:spring]
 
 # Git commit
 # ==============================================================================
