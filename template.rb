@@ -54,6 +54,8 @@ gem_group :test do
   gem 'capybara'
   # Database cleaner
   gem 'database_rewinder'
+  # save_and_open_page
+  gem 'launchy'
   # Code coverage analysis tool
   gem 'simplecov', '~> 0.7.1', require: false
 end
