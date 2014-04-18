@@ -88,6 +88,8 @@ gem_group :development do
   gem 'binding_of_caller'
   # Turns off the asset pipeline log
   gem 'quiet_assets'
+  # Spring
+  gem 'spring-commands-rspec' if use[:spring]
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
@@ -273,7 +275,10 @@ rake 'db:migrate'
 
 # Spring
 # ==============================================================================
-run 'bundle exec spring binstub --all' if use[:spring]
+if use[:spring]
+  run 'bundle exec spring binstub --all'
+  gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'spring rspec' do"
+end
 
 # Git commit
 # ==============================================================================
