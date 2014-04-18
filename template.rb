@@ -208,6 +208,7 @@ append_to_file '.rspec', "--format documentation\n"
 
 # DatabaseRewinder
 # ------------------------------------------------------------------------------
+gsub_file 'spec/spec_helper.rb', "config.use_transactional_fixtures = true", "config.use_transactional_fixtures = false"
 insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
 %q{
   config.before :suite do
