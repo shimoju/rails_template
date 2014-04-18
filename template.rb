@@ -56,6 +56,8 @@ gem_group :test do
   gem 'database_rewinder'
   # save_and_open_page
   gem 'launchy'
+  # Generate fake data
+  gem 'faker'
   # Code coverage analysis tool
   gem 'simplecov', '~> 0.7.1', require: false
 end
