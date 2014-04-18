@@ -53,6 +53,8 @@ end
 gem_group :test do
   # Acceptance test framework
   gem 'capybara'
+  # A PhantomJS driver for Capybara
+  gem 'poltergeist'
   # Database cleaner
   gem 'database_rewinder'
   # save_and_open_page
