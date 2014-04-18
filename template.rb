@@ -5,6 +5,7 @@ use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
 use[:devise] = yes?('Use devise?')
 use[:spring] = yes?('Use Spring preloader?')
+use[:root] = yes?('Generate welcome#index as root path?')
 
 # Git
 # ==============================================================================
@@ -251,9 +252,11 @@ end
 
 # Root path
 # ==============================================================================
-generate 'controller', 'welcome index'
-uncomment_lines 'config/routes.rb', "root 'welcome#index'"
-comment_lines 'config/routes.rb', "get 'welcome/index'"
+if use[:root]
+  generate 'controller', 'welcome index'
+  uncomment_lines 'config/routes.rb', "root 'welcome#index'"
+  comment_lines 'config/routes.rb', "get 'welcome/index'"
+end
 
 # Environment variables
 # ==============================================================================
