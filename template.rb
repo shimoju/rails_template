@@ -266,6 +266,9 @@ run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/vi
 # ------------------------------------------------------------------------------
 if use[:devise]
   generate 'devise:install'
+  insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+    "  config.include Devise::TestHelpers, type: :controller\n"
+  end
 end
 
 # Root path
