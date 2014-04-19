@@ -68,6 +68,7 @@ end
 gem_group :development, :test do
   # Testing framework
   gem 'rspec-rails', '~> 3.0.0.beta2'
+  gem 'rspec', '~> 3.0.0.beta2'
   # Fixtures replacement
   gem 'factory_girl_rails'
   # Autoload .env
