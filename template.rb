@@ -240,6 +240,16 @@ end
 prepend_to_file 'spec/spec_helper.rb', "require 'simplecov'\n\n"
 create_file '.simplecov', "SimpleCov.start 'rails'\n"
 
+# Capybara
+# ------------------------------------------------------------------------------
+insert_into_file 'spec/spec_helper.rb', after: "require 'rspec/rails'\n" do
+  "require 'capybara/rails'\nrequire 'capybara/rspec'\n"
+end
+# Poltergeist
+insert_into_file 'spec/spec_helper.rb', after: "require 'capybara/rspec'\n" do
+  "require 'capybara/poltergeist'\nCapybara.javascript_driver = :poltergeist\n"
+end
+
 # Guard
 # ------------------------------------------------------------------------------
 run 'bundle exec guard init'
