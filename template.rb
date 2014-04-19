@@ -237,7 +237,8 @@ end
 
 # SimpleCov
 # ------------------------------------------------------------------------------
-prepend_to_file 'spec/spec_helper.rb', "require 'simplecov'\nSimpleCov.start 'rails'\n\n"
+prepend_to_file 'spec/spec_helper.rb', "require 'simplecov'\n\n"
+create_file '.simplecov', "SimpleCov.start 'rails'\n"
 
 # Guard
 # ------------------------------------------------------------------------------
