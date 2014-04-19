@@ -44,6 +44,7 @@ gem 'puma' if use[:puma]
 gem 'slim-rails'
 # Authentication solution
 gem 'devise' if use[:devise]
+gem 'devise-i18n' if use[:devise]
 
 gem_group :production do
   gem 'pg' if use[:heroku]
