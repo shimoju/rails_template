@@ -109,6 +109,8 @@ gem_group :development do
   gem 'html2slim', require: false
 end
 
+gsub_file 'Gemfile', '"', "'"
+
 # Run bundle
 # ==============================================================================
 run 'bundle install --without production'
