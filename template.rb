@@ -34,6 +34,10 @@ add_source 'https://rails-assets.org'
 # Specify Ruby version
 prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 
+# Don't use SQLite in production
+gsub_file 'Gemfile', "gem 'sqlite3'", "gem 'sqlite3', group: [:development, :test]"
+
+# Add Gems
 # Process manager
 gem 'foreman'
 # App server
@@ -103,10 +107,6 @@ gem_group :development do
   gem 'guard-rspec', require: false
   # Convert ERB to Slim
   gem 'html2slim', require: false
-end
-
-if use[:heroku]
-  gsub_file 'Gemfile', "gem 'sqlite3'", "gem 'sqlite3', group: [:development, :test]"
 end
 
 # Run bundle
