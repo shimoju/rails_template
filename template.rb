@@ -4,7 +4,6 @@ use = {}
 use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
 use[:devise] = yes?('Use devise?')
-use[:spring] = yes?('Use Spring preloader?')
 use[:root] = yes?('Generate welcome#index as root path?')
 
 # Git
@@ -92,8 +91,8 @@ gem_group :development do
   gem 'binding_of_caller'
   # Turns off the asset pipeline log
   gem 'quiet_assets'
-  # Spring
-  gem 'spring-commands-rspec' if use[:spring]
+  # Spring additional commands
+  gem 'spring-commands-rspec'
   # I18n locale files generators
   gem 'i18n_generators'
   # Handle events on file system modifications
@@ -295,10 +294,8 @@ rake 'db:migrate'
 
 # Spring
 # ==============================================================================
-if use[:spring]
-  run 'bundle exec spring binstub --all'
-  gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'spring rspec' do"
-end
+run 'bundle exec spring binstub --all'
+gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'spring rspec' do"
 
 # Git commit
 # ==============================================================================
