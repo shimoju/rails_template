@@ -94,6 +94,8 @@ gem_group :development do
   gem 'quiet_assets'
   # Spring
   gem 'spring-commands-rspec' if use[:spring]
+  # I18n locale files generators
+  gem 'i18n_generators'
   # Handle events on file system modifications
   gem 'guard'
   gem 'terminal-notifier-guard'
