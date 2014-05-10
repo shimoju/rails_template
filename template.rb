@@ -132,6 +132,8 @@ create_file '.env' do
 SECRET_KEY_BASE=your_secret_key
 }
 end
+# Specify Ruby version
+create_file '.ruby-version', "#{RUBY_VERSION}\n"
 
 # application.rb
 # ------------------------------------------------------------------------------
