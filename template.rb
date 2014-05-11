@@ -259,6 +259,10 @@ insert_into_file 'spec/spec_helper.rb', after: "require 'capybara/rspec'\n" do
   "require 'capybara/poltergeist'\nCapybara.javascript_driver = :poltergeist\n"
 end
 
+# Annotate
+# ------------------------------------------------------------------------------
+generate 'annotate:install'
+
 # Guard
 # ------------------------------------------------------------------------------
 run 'bundle exec guard init'
