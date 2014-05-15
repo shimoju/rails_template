@@ -305,7 +305,7 @@ rake 'db:migrate'
 # Spring
 # ==============================================================================
 run 'bundle exec spring binstub --all'
-gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'spring rspec' do"
+gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'bin/rspec' do"
 
 # Git commit
 # ==============================================================================
