@@ -221,8 +221,8 @@ append_to_file '.rspec', "--format documentation\n"
 
 # DatabaseRewinder
 # ------------------------------------------------------------------------------
-gsub_file 'spec/spec_helper.rb', "config.use_transactional_fixtures = true", "config.use_transactional_fixtures = false"
-insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+gsub_file 'spec/rails_helper.rb', "config.use_transactional_fixtures = true", "config.use_transactional_fixtures = false"
+insert_into_file 'spec/rails_helper.rb', after: "RSpec.configure do |config|\n" do
 %q{
   config.before :suite do
     DatabaseRewinder.clean_all
@@ -237,25 +237,25 @@ end
 
 # factory_girl
 # ------------------------------------------------------------------------------
-insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+insert_into_file 'spec/rails_helper.rb', after: "RSpec.configure do |config|\n" do
   "  config.include FactoryGirl::Syntax::Methods\n"
 end
-insert_into_file 'spec/spec_helper.rb', after: "config.before :suite do\n" do
+insert_into_file 'spec/rails_helper.rb', after: "config.before :suite do\n" do
   "    FactoryGirl.reload\n"
 end
 
 # SimpleCov
 # ------------------------------------------------------------------------------
-prepend_to_file 'spec/spec_helper.rb', "require 'simplecov'\n\n"
+prepend_to_file 'spec/rails_helper.rb', "require 'simplecov'\n\n"
 create_file '.simplecov', "SimpleCov.start 'rails'\n"
 
 # Capybara
 # ------------------------------------------------------------------------------
-insert_into_file 'spec/spec_helper.rb', after: "require 'rspec/rails'\n" do
+insert_into_file 'spec/rails_helper.rb', after: "require 'rspec/rails'\n" do
   "require 'capybara/rails'\nrequire 'capybara/rspec'\n"
 end
 # Poltergeist
-insert_into_file 'spec/spec_helper.rb', after: "require 'capybara/rspec'\n" do
+insert_into_file 'spec/rails_helper.rb', after: "require 'capybara/rspec'\n" do
   "require 'capybara/poltergeist'\nCapybara.javascript_driver = :poltergeist\n"
 end
 
@@ -277,7 +277,7 @@ run 'bundle exec erb2slim --delete app/views/layouts/application.html.erb app/vi
 # ------------------------------------------------------------------------------
 if use[:devise]
   generate 'devise:install'
-  insert_into_file 'spec/spec_helper.rb', after: "RSpec.configure do |config|\n" do
+  insert_into_file 'spec/rails_helper.rb', after: "RSpec.configure do |config|\n" do
     "  config.include Devise::TestHelpers, type: :controller\n"
   end
 end
