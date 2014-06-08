@@ -5,6 +5,7 @@ use[:heroku] = yes?('Use Heroku?')
 use[:puma] = yes?('Use Puma as the app server?')
 use[:devise] = yes?('Use devise?')
 use[:root] = yes?('Generate welcome#index as root path?')
+use[:travis] = yes?('Use Travis CI?')
 
 # Git
 # ==============================================================================
@@ -307,6 +308,18 @@ rake 'db:migrate'
 # ==============================================================================
 run 'bundle exec spring binstub --all'
 gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'bin/rspec' do"
+
+# CI
+# ==============================================================================
+if use[:travis]
+  create_file '.travis.yml' do
+%Q{language: ruby
+rvm:
+  - #{RUBY_VERSION}
+bundler_args: --without development:production --deployment
+}
+  end
+end
 
 # Git commit
 # ==============================================================================
