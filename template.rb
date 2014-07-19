@@ -66,7 +66,7 @@ gem_group :test do
   # Generate fake data
   gem 'faker'
   # Code coverage analysis tool
-  gem 'simplecov', '~> 0.7.1', require: false
+  gem 'simplecov', require: false
 end
 
 gem_group :development, :test do
