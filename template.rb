@@ -314,7 +314,7 @@ if use[:travis]
 %Q{language: ruby
 rvm:
   - #{RUBY_VERSION}
-bundler_args: --without development:production --deployment
+bundler_args: --without development production --deployment
 }
   end
 end
