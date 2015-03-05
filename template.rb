@@ -16,7 +16,7 @@ append_to_file '.gitignore' do
 **.orig
 /vendor/bundle
 /spec/tmp
-/coverage/
+/coverage
 .env*
 }
 end
