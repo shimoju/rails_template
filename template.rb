@@ -295,7 +295,7 @@ rake 'db:migrate'
 # Spring
 # ==============================================================================
 run 'bundle exec spring binstub --all'
-gsub_file 'Guardfile', 'guard :rspec do', "guard :rspec, cmd: 'bin/rspec' do"
+gsub_file 'Guardfile', 'guard :rspec, cmd: "bundle exec rspec" do', "guard :rspec, cmd: 'bin/rspec' do"
 
 # CI
 # ==============================================================================
