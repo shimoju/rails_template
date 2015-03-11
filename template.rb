@@ -86,9 +86,6 @@ gem_group :development, :test do
 end
 
 gem_group :development do
-  # Better error page
-  gem 'better_errors'
-  gem 'binding_of_caller'
   # Schema Information
   gem 'annotate'
   # Turns off the asset pipeline log
