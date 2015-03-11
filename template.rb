@@ -164,8 +164,9 @@ if use[:puma]
   create_file 'Procfile', "web: bundle exec puma -C config/puma.rb\n"
   create_file 'config/puma.rb' do
 %q{# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
-workers Integer(ENV['PUMA_WORKERS'] || 3)
-threads Integer(ENV['MIN_THREADS']  || 1), Integer(ENV['MAX_THREADS'] || 16)
+workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+threads_count = Integer(ENV['MAX_THREADS'] || 5)
+threads threads_count, threads_count
 
 preload_app!
 
@@ -174,39 +175,22 @@ port        ENV['PORT']     || 3000
 environment ENV['RACK_ENV'] || 'development'
 
 on_worker_boot do
-  # worker specific setup
-  ActiveSupport.on_load(:active_record) do
-    config = ActiveRecord::Base.configurations[Rails.env] ||
-                Rails.application.config.database_configuration[Rails.env]
-    config['pool'] = ENV['MAX_THREADS'] || 16
-    ActiveRecord::Base.establish_connection(config)
-  end
+  # Worker specific setup for Rails 4.1+
+  # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
+  ActiveRecord::Base.establish_connection
 end
 }
   end
-  create_file 'config/initializers/database_connection.rb' do
-%q{# https://devcenter.heroku.com/articles/concurrency-and-database-connections
-Rails.application.config.after_initialize do
-  ActiveRecord::Base.connection_pool.disconnect!
-
-  ActiveSupport.on_load(:active_record) do
-    config = ActiveRecord::Base.configurations[Rails.env] ||
-                Rails.application.config.database_configuration[Rails.env]
-    config['pool']              = ENV['DB_POOL']      || ENV['MAX_THREADS'] || 5
-    ActiveRecord::Base.establish_connection(config)
-  end
-end
+  append_to_file 'config/database.yml' do
+%q{  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
 }
   end
   append_to_file '.env' do
 %q{
-# config/initializers/database_connection.rb
-# DB_POOL=5
-
-# config/puma.rb
-MAX_THREADS=16
-MIN_THREADS=1
-PUMA_WORKERS=3
+# Puma
+WEB_CONCURRENCY=2
+MAX_THREADS=5
 }
   end
 end
