@@ -99,6 +99,7 @@ gem_group :development do
   gem 'i18n_generators'
   # Handle events on file system modifications
   gem 'guard'
+  gem 'terminal-notifier'
   gem 'terminal-notifier-guard'
   gem 'guard-livereload', require: false
   gem 'guard-pow', require: false
