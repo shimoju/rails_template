@@ -28,9 +28,6 @@ git commit: %Q{ -m 'Initial commit' }
 
 # Gems
 # ==============================================================================
-# Use Rails Assets
-add_source 'https://rails-assets.org'
-
 # Specify Ruby version
 prepend_to_file 'Gemfile', "ruby '#{RUBY_VERSION}'\n"
 
@@ -108,6 +105,14 @@ gem_group :development do
   gem 'guard-rspec', require: false
   # Convert ERB to Slim
   gem 'html2slim', require: false
+end
+
+# Use Rails Assets
+append_to_file 'Gemfile' do
+%q{
+source 'https://rails-assets.org' do
+end
+}
 end
 
 gsub_file 'Gemfile', '"', "'"
