@@ -36,9 +36,9 @@ gsub_file 'Gemfile', "gem 'sqlite3'", "gem 'sqlite3', group: [:development, :tes
 
 # Add Gems
 # Process manager
-gem 'foreman'
+gem 'foreman', require: false
 # App server
-gem 'puma' if use[:puma]
+gem 'puma', require: false if use[:puma]
 
 # Template engine
 gem 'slim-rails'
